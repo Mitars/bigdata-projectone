@@ -1,6 +1,6 @@
 # Project One
 
-Initial version of the project which uses Apache Spark to read data from a csv file, ingests it into Kafka, reads that Kafka topic with Apache Spark and submits it to a Database.
+Initial version of the project which uses Apache Spark to read data from a csv file and ingest it into Kafka.
 
 ## Producers
 
