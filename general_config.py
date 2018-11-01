@@ -19,6 +19,7 @@ def console_bold(text):
 required_dependencies = "org.apache.spark:spark-sql-kafka-0-10_2.11:2.3.2"
 bootstrap_servers = "localhost:9092"
 
+# Producers
 producer_columnsdescription = ColumnDescriptionProducer()
 producer_applicationtest = ApplicationTestProducer()
 
