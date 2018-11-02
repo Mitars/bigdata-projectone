@@ -11,7 +11,7 @@ def printAvailableProducers(producers):
     """
     print("available producers:")
     for p in producers:
-        print("\t- " + p.producer_name)
+        print("\t- " + p.name)
     print("")
 
 
@@ -27,7 +27,7 @@ def incorrectProducerArgument(producers, producer_name=None):
         print("No producer called \"" + producer_name + "\" available.")
     print("Please specify an existing producer as an argument.")
     printAvailableProducers(producers)
-    print("Example: spark-submit --packages " + cfg.required_dependencies + " main.py " + cfg.console_bold(producers[0].producer_name) +"\n")
+    print("Example: spark-submit --packages " + cfg.required_dependencies + " main.py " + cfg.console_bold(producers[0].name) +"\n")
 
 
 def selectExistingProducer(producers, console_arguments):
