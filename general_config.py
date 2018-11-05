@@ -41,5 +41,5 @@ producer_columnsdescription.drop_path = "droplocation/columnsdescription"
 producer_applicationtest.drop_path = "droplocation/applicationtest"
 
 # Checkpoint Path
-producer_columnsdescription.checkpoint_path = "/home/ms/checkpoint/homecredit.columnsdescription/"
-producer_applicationtest.checkpoint_path = "/home/ms/checkpoint/homecredit.applicationtest/"
+producer_columnsdescription.checkpoint_path = "checkpoint/homecredit.columnsdescription/"
+producer_applicationtest.checkpoint_path = "checkpoint/homecredit.applicationtest/"

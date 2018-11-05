@@ -1,7 +1,7 @@
 import sys
 
 
-def printTitle(text):
+def print_title(text):
     """Prints the title
 
     Arguments:
@@ -11,7 +11,7 @@ def printTitle(text):
     sys.stdout.write("\x1b]2;" + text + "\x07")
 
 
-def printConsoleAndTitle(text):
+def print_console_and_title(text):
     """Prints to the console and console title.
 
     Arguments:
