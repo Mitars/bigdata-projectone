@@ -1,11 +1,8 @@
 from pyspark.sql.types import StringType
-from producers.producer import Producer
+from producer_raw import ProducerRaw
 
 
-class ColumnDescriptionProducer(Producer):
-    def __init__(self):
-        self.name = 'columnsdescription'
-
+class ColumnDescriptionProducer(ProducerRaw):
     def get_schema(self):
         return [
             (StringType, "id"),

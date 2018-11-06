@@ -1,11 +1,8 @@
 from pyspark.sql.types import StringType, FloatType
-from producers.producer import Producer
+from producer_raw import ProducerRaw
 
 
-class ApplicationTestProducer(Producer):
-    def __init__(self):
-        self.name = 'applicationtest'
-
+class ApplicationTestProducer(ProducerRaw):
     def get_schema(self):
         return [
             (StringType, "id"),
