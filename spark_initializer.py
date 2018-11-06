@@ -1,18 +1,5 @@
 from pyspark.sql.types import StructType, StructField
-from pyspark.sql import SparkSession, DataFrame
-
-
-def select_key_value(self, key, value):
-    """Casts the given columns to a string and gives them a key and value alias.
-
-    Args:
-        key (string): The column which represents the key.
-        value (string): The column which represents the value.
-
-    Returns:
-        DataFrame: The key and value selection.
-    """
-    return self.selectExpr("CAST(" + key + " AS STRING) key", "CAST(" + value + " AS STRING) value")
+from pyspark.sql import SparkSession
 
 
 def initialize_session(app_name):
@@ -30,7 +17,6 @@ def initialize_session(app_name):
         .getOrCreate()
 
     sparkSession.sparkContext.setLogLevel("ERROR")
-    DataFrame.select_key_value = select_key_value
 
     return sparkSession
 
@@ -52,8 +38,7 @@ def read_stream(spark_session, drop_path, schema):
         .schema(StructType([StructField(field[1], field[0](), True) for field in schema]))\
         .csv(drop_path)
 
-    print("\nThe stream is " +
-          ("ready!\n" if fileStreamDF.isStreaming else "NOT ready!\n"))
+    print("\nThe stream is " + ("ready!\n" if fileStreamDF.isStreaming else "NOT ready!\n"))
     print("Schema:")
     fileStreamDF.printSchema()
 

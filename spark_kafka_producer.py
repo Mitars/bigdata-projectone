@@ -1,4 +1,4 @@
-from utils import print_title
+from utils import print_title, console_bold
 import general_config as cfg
 import spark_initializer
 
@@ -12,24 +12,24 @@ def initialize_kafka_producer_stream(producer):
     """
     # Spark Configuration
     spark_session = spark_initializer.initialize_session(producer.app_name)
-    fileStreamDF = spark_initializer.read_stream(
+    file_stream_df = spark_initializer.read_stream(
         spark_session, producer.drop_path, producer.get_schema())
 
-    # Execute dataframe operation
-    resultDF = producer.stream_modification(fileStreamDF)
+    # Converts the dataframe to a JSON format
+    result_df = producer.to_json_df(file_stream_df)
 
     # Stream Data to Kafka
     print("Streaming to Kafka topic \"" + producer.topic + "\" ...")
     print_title("Kafka - Streaming to topic \"" + producer.topic + "\"")
 
     try:
-        resultDF.select_key_value(producer.key_value[0], producer.key_value[1])\
+        result_df.selectExpr("CAST(value AS STRING)")\
             .writeStream\
-            .outputMode("complete")\
+            .outputMode("append")\
             .format("kafka")\
             .option("kafka.bootstrap.servers", cfg.bootstrap_servers)\
             .option("topic", producer.topic)\
-            .option("checkpointLocation", producer.checkpoint_path + producer.topic)\
+            .option("checkpointLocation", producer.checkpoint_path)\
             .start()\
             .awaitTermination()
     except Exception as e:
@@ -37,4 +37,4 @@ def initialize_kafka_producer_stream(producer):
         print(e)
         print("An error occured.")
         print("Are you missing the required dependencies?")
-        print("Example: spark-submit " + cfg.console_bold("--packages " + cfg.required_dependencies) + " main.py " + cfg.activeProducers[0].name + "\n")
+        print("Example: spark-submit " + console_bold("--packages " + cfg.required_dependencies) + " main.py " + cfg.activeProducers[0].name + "\n")

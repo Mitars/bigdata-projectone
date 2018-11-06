@@ -16,7 +16,7 @@ def printAvailableProducers(producers):
 
 
 def incorrectProducerArgument(producers, producer_name=None):
-    """prints an error message when the arguments have not been specified correctly.
+    """Prints an error message when the arguments have not been specified correctly.
 
     Args:
         producers (list): The list of available producers.
